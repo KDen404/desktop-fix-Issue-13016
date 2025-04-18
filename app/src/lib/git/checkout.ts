@@ -27,9 +27,11 @@ async function getBranchCheckoutArgs(branch: Branch) {
   return [
     ...(branch.type === BranchType.Remote
       ? ['-b', branch.nameWithoutRemote]
-      : [branch.name]),
-    ...(enableRecurseSubmodulesFlag() ? ['--recurse-submodules'] : []),
-    '--',
+      : []),
+    ...(branch.type === BranchType.Local
+      ? [branch.name]
+      : []),
+    ...(enableRecurseSubmodulesFlag() ? ['--recurse-submodules'] : [])
   ]
 }
 
