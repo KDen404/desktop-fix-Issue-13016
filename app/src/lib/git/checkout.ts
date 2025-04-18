@@ -25,10 +25,9 @@ function getCheckoutArgs(progressCallback?: ProgressCallback) {
 
 async function getBranchCheckoutArgs(branch: Branch) {
   return [
-    branch.name,
     ...(branch.type === BranchType.Remote
       ? ['-b', branch.nameWithoutRemote]
-      : []),
+      : [branch.name]),
     ...(enableRecurseSubmodulesFlag() ? ['--recurse-submodules'] : []),
     '--',
   ]
